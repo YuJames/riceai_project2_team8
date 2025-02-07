@@ -16,4 +16,4 @@
 :card_index_dividers: raw_data - raw, unmodified data from sources      
 :card_index_dividers: postprocessed_data - modified data from raw_data
 ## Presentation
-https://docs.google.com/presentation/d/1PQZbi-FGOKwOWqtc63nXFVliKyka2rrMemfKzvGzv8o/edit?usp=sharing
+https://docs.google.com/presentation/d/1gwa7RFDy9zVLOFGkmhLIrceSK4OEe4V8/
