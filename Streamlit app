@@ -1,0 +1,75 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPPKmQFZqMAWpZmCpASDb8N"
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "e3gsOUGjwdiN"
+      },
+      "outputs": [],
+      "source": [
+        "import streamlit as st\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# Streamlit app title\n",
+        "st.title(\"Housing Market Data Visualizer\")\n",
+        "\n",
+        "# File uploader\n",
+        "uploaded_file = st.file_uploader(\"Upload a CSV file with housing market data\", type=[\"csv\"])\n",
+        "\n",
+        "if uploaded_file is not None:\n",
+        "    # Read CSV file\n",
+        "    df = pd.read_csv(uploaded_file)\n",
+        "    st.write(\"### Preview of Data:\")\n",
+        "    st.dataframe(df.head())\n",
+        "\n",
+        "    # Select numeric columns for visualization\n",
+        "    numeric_cols = df.select_dtypes(include=['number']).columns.tolist()\n",
+        "    if not numeric_cols:\n",
+        "        st.error(\"No numeric columns found in the dataset!\")\n",
+        "    else:\n",
+        "        # Select columns for visualization\n",
+        "        x_axis = st.selectbox(\"Select X-axis variable\", numeric_cols)\n",
+        "        y_axis = st.selectbox(\"Select Y-axis variable\", numeric_cols)\n",
+        "\n",
+        "        # Filter data based on user input\n",
+        "        st.write(\"### Data Filtering\")\n",
+        "        filter_col = st.selectbox(\"Select a column to filter (optional)\", [None] + df.columns.tolist())\n",
+        "\n",
+        "        if filter_col:\n",
+        "            unique_values = df[filter_col].dropna().unique()\n",
+        "            selected_values = st.multiselect(\"Select values to include\", unique_values, default=unique_values[:5])\n",
+        "            df = df[df[filter_col].isin(selected_values)]\n",
+        "\n",
+        "        # Create scatter plot\n",
+        "        st.write(\"### Housing Market Trends\")\n",
+        "        fig, ax = plt.subplots()\n",
+        "        ax.scatter(df[x_axis], df[y_axis], alpha=0.5)\n",
+        "        ax.set_xlabel(x_axis)\n",
+        "        ax.set_ylabel(y_axis)\n",
+        "        ax.set_title(f\"{y_axis} vs {x_axis}\")\n",
+        "        st.pyplot(fig)\n",
+        "\n",
+        "        # Show summary statistics\n",
+        "        st.write(\"### Summary Statistics\")\n",
+        "        st.write(df.describe())\n"
+      ]
+    }
+  ]
+}
