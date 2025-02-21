@@ -3,10 +3,6 @@
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 
 # riceai_project2_team8
-## Overview
-
-## Analysis Summary
-
 ## How-to
 ### Download Data
 1. Modify **data.ipynb** as necessary
@@ -20,8 +16,9 @@
 2. Select CSV file, select columns, select filtering
 ## Files n Folders  
 :paperclip: data.ipynb - gathers data for analysis      
-:paperclip: analysis.ipynb - processes data      
-:paperclip: analysis.ipynb - models data           
+:paperclip: analysis.ipynb - processes data (1st pass)     
+:paperclip: analysis.ipynb - models data (1st pass)          
+:paperclip: model.py - 2nd and 3rd pass results     
 :card_index_dividers: raw_data - raw, unmodified data from sources      
 :card_index_dividers: postprocessed_data - modified data from raw_data      
 :card_index_dividers: model_data - data created by analysis.ipynb, for evaluation in analysis.py        
